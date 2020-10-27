@@ -59,7 +59,7 @@ body, html {
     cursor: default;
 }
 
-#add-driver-btn, #done-edit-btn, #create-sched-btn, #opt-schedule-btn, #sec-schedule-btn, #dlBtn {
+#add-driver-btn, #done-edit-btn, #create-sched-btn, #opt-schedule-btn, #sec-schedule-btn, #dlBtn, #csv-btn {
     display: inline-block;
     padding: 10px;
     margin: 15px;
@@ -68,7 +68,7 @@ body, html {
     cursor: pointer;
 }
 
-#add-driver-btn:hover, #done-edit-btn:hover, #create-sched-btn:hover, #opt-schedule-btn:hover, #sec-schedule-btn:hover, #dlBtn:hover {
+#add-driver-btn:hover, #done-edit-btn:hover, #create-sched-btn:hover, #opt-schedule-btn:hover, #sec-schedule-btn:hover, #dlBtn:hover, #csv-btn:hover {
     background-color: lightgray;
 }
 
@@ -100,10 +100,10 @@ body, html {
 .driver-info {
     background-color: #e2e2e2;
     border-radius: 10px;
-    width: 715px;
+    width: max-content;
+    padding-right: 18px;
     height: 45px;
     margin: 2px auto;
-    
 }
 
 .name-input {
@@ -258,6 +258,6 @@ td, th {
 }
 
 #dlBtn {
-    margin-left: 200px;
+    margin-left: 215px;
     margin-top: 50px;
 }

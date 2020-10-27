@@ -17,9 +17,8 @@ class Schedule {
         schedule.alphabetizeDrivers();
         
         this.updateConfigFiles();
-        
-        // console.log(optConfig);
-        // console.log(secConfig);
+        this.updateCSVFiles();
+    
     }
 
     //ordering drivers based on number of optimal schedules they have with bubble sort
@@ -168,6 +167,37 @@ class Schedule {
             const secObject = {...optObject};
             secObject.offWithin = this.calculateNewOffWithin('sec', i);
             secConfig.driver.push(secObject);
+        }
+    }
+
+    updateCSVFiles = () => {
+        optCSV = '';
+        secCSV = '';
+        optCSV += 'Last,First,Sun,Mon,Tues,Wed,Thurs,Fri,Sat\r\n';
+        secCSV += 'Last,First,Sun,Mon,Tues,Wed,Thurs,Fri,Sat\r\n';
+      
+        for (let i = 0; i < this.drivers.length; i++) {
+            let nextOptRow = '' + this.drivers[i].last + ',' + this.drivers[i].first + ',';
+            let nextSecRow = '' + this.drivers[i].last + ',' + this.drivers[i].first + ',';
+            for (let j = 0; j < 7; j++) {
+                if (this.optMatrix[i][j] == 2) {
+                    nextOptRow += 'ON,'
+                } else {
+                    nextOptRow += 'OFF,'
+                }
+                if (this.secMatrix[i][j] == 2) {
+                    nextSecRow += 'ON,'
+                } else {
+                    nextSecRow += 'OFF,'
+                }
+            }
+            nextOptRow = nextOptRow.slice(0, -1);
+            nextSecRow = nextSecRow.slice(0, -1);
+            nextOptRow += '\r\n';
+            nextSecRow += '\r\n';
+        
+            optCSV += nextOptRow;
+            secCSV += nextSecRow;
         }
     }
 

@@ -1,7 +1,7 @@
 let schedule = new Schedule();
 let downloadConfig;
-let optConfig;
-let secConfig;
+let optConfig, secConfig;
+let optCSV, secCSV;
 
 //creates the schedule button
 createScheduleBtn = () => {
@@ -16,6 +16,7 @@ createScheduleBtn = () => {
         objectifyConfigFile();
         schedule.createEmployeeSchedules();
         createDownloadBtn();
+        createDownloadCSVBtn();
         createScheduleToggleBtns();
         createScheduleTable();
         
@@ -63,6 +64,10 @@ createScheduleToggleBtns = () => {
         const dlBtn = document.getElementById('dlBtn');
         dlBtn.value = 'opt';
         dlBtn.innerHTML = 'Download Optimal Config File';
+
+        const csvBtn = document.getElementById('csv-btn');
+        csvBtn.value = 'opt';
+        csvBtn.innerHTML = 'Download Optimal CSV File';
     }
 
     const secScheduleBtn = document.createElement('div');
@@ -88,6 +93,10 @@ createScheduleToggleBtns = () => {
         const dlBtn = document.getElementById('dlBtn');
         dlBtn.value = 'sec';
         dlBtn.innerHTML = 'Download Secondary Config File';
+
+        const csvBtn = document.getElementById('csv-btn');
+        csvBtn.value = 'sec';
+        csvBtn.innerHTML = 'Download Secondary CSV File';
     }
 
     const dlBtn =  document.getElementById('dlBtn');
@@ -230,6 +239,7 @@ createDownloadBtn = () => {
     dlBtn.id = 'dlBtn';
     dlBtn.innerHTML = 'Download Optimal Config File';
     dlBtn.value = 'opt';
+    
     dlBtn.onclick = () => {
             
         let date = new Date();
@@ -245,10 +255,10 @@ createDownloadBtn = () => {
         const dlBtn = document.getElementById('dlBtn');
         if (dlBtn.value == 'opt') {
             text = JSON.stringify(optConfig);
-            filename = formatDate + 'configOpt' + '.txt';
+            filename = formatDate + '_configOpt' + '.txt';
         } else if (dlBtn.value == 'sec') {
             text = JSON.stringify(secConfig);
-            filename = formatDate + 'configSec' + '.txt';
+            filename = formatDate + '_configSec' + '.txt';
         }
 
         let element = document.createElement('a');
@@ -266,4 +276,48 @@ createDownloadBtn = () => {
     }
 
     container.appendChild(dlBtn);
+}
+
+createDownloadCSVBtn = () => {
+    const csvBtn = document.createElement('div');
+    csvBtn.id = 'csv-btn';
+    csvBtn.innerHTML = 'Download Optimal CSV File';
+    csvBtn.value = 'opt';
+
+    csvBtn.onclick = () => {
+
+        let date = new Date();
+        let formatDate = ''
+        formatDate += date.getFullYear();
+        formatDate += '-';
+        formatDate += date.getMonth() + 1;
+        formatDate += '-';
+        formatDate += date.getDate();
+
+        let filename;
+        let text;
+        const csvBtn = document.getElementById('csv-btn');
+        if (csvBtn.value == 'opt') {
+            text = optCSV;
+            filename = formatDate + '_opt' + '.csv';
+        } else if (csvBtn.value == 'sec') {
+            text = secCSV;
+            filename = formatDate + '_sec' + '.csv';
+        }
+
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        //TEMP DISABLING DOWNLOAD
+        element.click();
+
+        document.body.removeChild(element);
+
+    }
+
+    container.appendChild(csvBtn);
 }
