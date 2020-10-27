@@ -257,7 +257,15 @@ td, th {
     text-align: center;
 }
 
-#dlBtn {
+/* #dlBtn {
     margin-left: 215px;
+    margin-top: 50px;
+} */
+
+#dl-btn-container {
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
     margin-top: 50px;
 }

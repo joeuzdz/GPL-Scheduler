@@ -15,6 +15,7 @@ createScheduleBtn = () => {
 
         objectifyConfigFile();
         schedule.createEmployeeSchedules();
+        createDlBtnContainer();
         createDownloadBtn();
         createDownloadCSVBtn();
         createScheduleToggleBtns();
@@ -99,12 +100,11 @@ createScheduleToggleBtns = () => {
         csvBtn.innerHTML = 'Download Secondary CSV File';
     }
 
-    const dlBtn =  document.getElementById('dlBtn');
-
     schedBtnsContainer.appendChild(optScheduleBtn);
     schedBtnsContainer.appendChild(secScheduleBtn);
 
-    container.insertBefore(schedBtnsContainer, dlBtn);
+    const dlBtnContainer =  document.getElementById('dl-btn-container');
+    container.insertBefore(schedBtnsContainer, dlBtnContainer);
 }
 
 //creates and formats an HTML table to show the schedule
@@ -195,8 +195,8 @@ createScheduleTable = () => {
     }
     table.appendChild(newRow);
 
-    const dlBtn = document.getElementById('dlBtn');
-    container.insertBefore(table, dlBtn);
+    const dlBtnContainer = document.getElementById('dl-btn-container');
+    container.insertBefore(table, dlBtnContainer);
 
     populateTable('opt');
 }
@@ -275,7 +275,8 @@ createDownloadBtn = () => {
 
     }
 
-    container.appendChild(dlBtn);
+    const dlBtnContainer = document.getElementById('dl-btn-container');
+    dlBtnContainer.appendChild(dlBtn);
 }
 
 createDownloadCSVBtn = () => {
@@ -319,5 +320,13 @@ createDownloadCSVBtn = () => {
 
     }
 
-    container.appendChild(csvBtn);
+    const dlBtnContainer = document.getElementById('dl-btn-container');
+    dlBtnContainer.appendChild(csvBtn);
+}
+
+createDlBtnContainer = () => {
+    const dlBtnContainer = document.createElement('div');
+    dlBtnContainer.id = 'dl-btn-container';
+
+    container.appendChild(dlBtnContainer);
 }
